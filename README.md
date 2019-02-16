@@ -57,11 +57,15 @@ $result = $wxpay->unifiedOrder([
     'price'         => '价格(分)',
     'attach'        => '扩展字段',
     'out_trade_no'  => '订单号',
+    'trade_type'    => 'JSAPI',
+    'openid'        => '小程序用户openid',
 ]);
+
 //小程序支付：
 $obj = $wxpay::callAppletPay($result);
+
 //APP原生支付：
-$obj = $wxpay::callAppPay($result);
+//$obj = $wxpay::callAppPay($result);
 
 将result通过json形式返给客户端即可
 
