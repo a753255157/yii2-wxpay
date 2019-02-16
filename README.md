@@ -49,14 +49,20 @@ return [
 ];
 
 [生成支付信息]
-$result = \Yii::$app->wxpay->unifiedOrder([
-                'attach'=>'扩展字段',
-                'out_trade_no'=>'订单号',
-                'price'=>'价格(分)',
-                'body'=>'商品描述',
-                'tag'=>'商品标签',
-                'id'=>'商品ID',
-            ])
+
+$wxpay  = Yii::$app->wxpay;
+$result = $wxpay->unifiedOrder([
+    'tag'           => '商品标签',
+    'body'          => '商品描述',
+    'price'         => '价格(分)',
+    'attach'        => '扩展字段',
+    'out_trade_no'  => '订单号',
+]);
+//小程序支付：
+$obj = $wxpay::callAppletPay($result);
+//APP原生支付：
+$obj = $wxpay::callAppPay($result);
+
 将result通过json形式返给客户端即可
 
 [回调代码]
